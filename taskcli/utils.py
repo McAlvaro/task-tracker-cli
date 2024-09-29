@@ -41,4 +41,12 @@ class Config:
         delete_parser = subparsers.add_parser("delete", help="Delete a task")
         delete_parser.add_argument("task_id", type=int, help="Task ID")
 
+        # Mark as in progress command
+        mark_in_progress_parser = subparsers.add_parser("mark-in-progress", help="Mark a task as in progress")
+        mark_in_progress_parser.add_argument("task_id", type=int, help="Task ID")
+
+        # Mark as done command
+        mark_done_parser = subparsers.add_parser("mark-done", help="Mark a task as done")
+        mark_done_parser.add_argument("task_id", type=int, help="Task ID")
+
         return parser.parse_args();
