@@ -1,3 +1,4 @@
+import argparse
 import json
 import os
 
@@ -21,3 +22,23 @@ class Config:
         path = os.path.expanduser(TASKS_FILE)
         with open(path, "w") as file:
             json.dump(database, file)
+
+    @staticmethod
+    def load_command_args() -> argparse.Namespace:
+        parser = argparse.ArgumentParser(description="Task Tracker CLI")
+        subparsers = parser.add_subparsers(dest="command", help="Available commands")
+
+        # Add command
+        add_parser = subparsers.add_parser("add", help="Add a task")
+        add_parser.add_argument("task_description", type=str, help="Task description")
+
+        # Update command
+        update_parser = subparsers.add_parser("update", help="Update a task")
+        update_parser.add_argument("task_id", type=int, help="Task ID")
+        update_parser.add_argument("task_description", type=str, help="Task description")
+
+        # Delete command
+        delete_parser = subparsers.add_parser("delete", help="Delete a task")
+        delete_parser.add_argument("task_id", type=int, help="Task ID")
+
+        return parser.parse_args();
