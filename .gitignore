@@ -10,4 +10,4 @@ tmp
 build/
 .idea
 .idea/*
-./tasks.json
+*.json
