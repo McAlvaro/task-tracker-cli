@@ -1,5 +1,5 @@
-from functions import add_task, list_tasks, update_task, delete_task, mark_task_in_progress, mark_task_done
-from utils import Config
+from taskcli.functions import add_task, list_tasks, update_task, delete_task, mark_task_in_progress, mark_task_done
+from taskcli.utils import Config
 
 def main() -> None:
     args = Config.load_command_args()

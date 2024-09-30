@@ -4,7 +4,7 @@ from enum import Enum
 from typing import Literal
 from tabulate import tabulate
 
-from utils import Config
+from taskcli.utils import Config
 
 class Status(Enum):
     TODO = "todo"
