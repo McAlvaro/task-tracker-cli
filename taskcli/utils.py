@@ -2,7 +2,7 @@ import argparse
 import json
 import os
 
-TASKS_FILE = "tasks.json"
+TASKS_FILE = "~/taskly.json"
 
 class Config:
     @staticmethod
