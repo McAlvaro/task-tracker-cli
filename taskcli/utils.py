@@ -49,4 +49,7 @@ class Config:
         mark_done_parser = subparsers.add_parser("mark-done", help="Mark a task as done")
         mark_done_parser.add_argument("task_id", type=int, help="Task ID")
 
+        # List command
+        list_parser = subparsers.add_parser("list", help="List all tasks")
+
         return parser.parse_args();

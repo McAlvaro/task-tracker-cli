@@ -1,11 +1,9 @@
-from functions import add_task, update_task, delete_task, mark_task_in_progress, mark_task_done
+from functions import add_task, list_tasks, update_task, delete_task, mark_task_in_progress, mark_task_done
 from utils import Config
 
 def main() -> None:
     args = Config.load_command_args()
     database = Config.load_database()
-
-    print(database)
 
     if args.command == "add":
         add_task(database, args.task_description)
@@ -17,6 +15,8 @@ def main() -> None:
         mark_task_in_progress(database, str(args.task_id))
     elif args.command == "mark-done":
         mark_task_done(database, str(args.task_id))
+    elif args.command == "list":
+        list_tasks(database)
     else:
         print("Invalid command")
 

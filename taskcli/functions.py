@@ -1,5 +1,8 @@
+from collections.abc import Generator
 from datetime import datetime
 from enum import Enum
+from typing import Literal
+from tabulate import tabulate
 
 from utils import Config
 
@@ -43,3 +46,28 @@ def mark_task_done(database : dict[str, dict], task_id: str) -> None:
     database[task_id]["status"] = Status.DONE.value
     database[task_id]["updatedAt"] = datetime.today().isoformat()
     Config.save_database(database)
+
+def list_tasks(database : dict[str, dict], status: Literal["all", "todo", "in-progress", "done"] = "all") -> None:
+
+    DATETIME_FORMAT: str = "%d/%m/%Y %H:%M:%S"
+
+    table: Generator = (
+        {
+            "Id": id,
+            "Description": properties["description"],
+            "Status": properties["status"],
+            "Created At": datetime.fromisoformat(properties["createdAt"]).strftime(
+                DATETIME_FORMAT
+            ),
+            "Updated At": datetime.fromisoformat(properties["updatedAt"]).strftime(
+                DATETIME_FORMAT
+            ),
+        }
+        for id, properties in sorted(database.items(), key=lambda t: t[0])
+        if status == "all" or status == properties["status"]
+    )
+    print_table(table)
+
+
+def print_table(table: Generator) -> None:
+    print(tabulate(table, tablefmt="rounded_grid", headers="keys") or "Nothing to display")
