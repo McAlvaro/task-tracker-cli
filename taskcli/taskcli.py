@@ -16,7 +16,7 @@ def main() -> None:
     elif args.command == "mark-done":
         mark_task_done(database, str(args.task_id))
     elif args.command == "list":
-        list_tasks(database)
+        list_tasks(database, args.status if args.status else "all")
     else:
         print("Invalid command")
 

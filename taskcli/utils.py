@@ -51,5 +51,10 @@ class Config:
 
         # List command
         list_parser = subparsers.add_parser("list", help="List all tasks")
+        list_subparsers = list_parser.add_subparsers(dest="status", help="Filter tasks by status")
+
+        list_subparsers.add_parser("todo", help="List todo tasks")
+        list_subparsers.add_parser("in-progress", help="List tasks in progress")
+        list_subparsers.add_parser("done", help="List done tasks")
 
         return parser.parse_args();
